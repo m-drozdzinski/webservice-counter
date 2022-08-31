@@ -1,0 +1,24 @@
+### CREATE NEW COUNTER
+POST http://localhost:8080/v1/counters
+Content-Type: application/json
+
+{
+    "name":"my_counter_1",
+    "value":0
+}
+
+
+### GET LIST OF ALL COUNTERS
+GET http://localhost:8080/v1/counters
+
+
+### GET SINGLE COUNTER
+GET http://localhost:8080/v1/counters/my_counter_1
+
+
+### INCREASE VALUE OF SINGLE COUNTER
+POST http://localhost:8080/v1/counters/my_counter_1?operation=INCREMENT
+
+
+### GET SINGLE COUNTER WHICH DO NOT EXISTS
+GET http://localhost:8080/v1/counters/not_existing_counter

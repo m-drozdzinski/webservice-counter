@@ -1,0 +1,96 @@
+openapi: 3.0.1
+info:
+  title: OpenAPI definition
+  version: v0
+servers:
+- url: http://localhost:8080
+  description: Generated server url
+paths:
+  /v1/counters:
+    get:
+      tags:
+      - counters-controller
+      operationId: getCounters
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/GetCountersResponseDto'
+    post:
+      tags:
+      - counters-controller
+      operationId: postCounters
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostCountersRequestDto'
+        required: true
+      responses:
+        "200":
+          description: OK
+  /v1/counters/{name}:
+    get:
+      tags:
+      - counters-controller
+      operationId: getCounter
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CounterDto'
+    post:
+      tags:
+      - counters-controller
+      operationId: postCounters_1
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: operation
+        in: query
+        required: true
+        schema:
+          type: string
+          enum:
+          - INCREMENT
+      responses:
+        "200":
+          description: OK
+components:
+  schemas:
+    PostCountersRequestDto:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: integer
+          format: int64
+    CounterDto:
+      type: object
+      properties:
+        name:
+          type: string
+        value:
+          type: integer
+          format: int64
+    GetCountersResponseDto:
+      type: object
+      properties:
+        counters:
+          type: array
+          items:
+            $ref: '#/components/schemas/CounterDto'
