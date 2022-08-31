@@ -18,3 +18,9 @@ There are some examples how to interact with service in director:  `manual_tests
 ## Api documentation
 
 Api can be found in `documentation` directory. If you followed [starting instruction](#starting-instruction) you should be able to load open swagger ui with `http://localhost:8080/swagger-ui.html`
+
+## Troubleshooting
+You may need to install java 17 for this project. Please follow instruction from [sdkman.io](https://sdkman.io/)
+```
+sdk install java
+```
