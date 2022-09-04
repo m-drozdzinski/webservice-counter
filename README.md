@@ -3,7 +3,7 @@
 
 ## Starting instructions
 
-Service can be started with following commands. Idea is to run scripts from project's `<root_directory>`
+Service can be started with following commands:
 
 ```
 git clone https://github.com/m-drozdzinski/webservice-counter.git
