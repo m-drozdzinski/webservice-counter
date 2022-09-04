@@ -21,19 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.webservicecounter.exception;
+package md.webservicecounter.config;
 
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
+import md.webservicecounter.exception.ForbiddenOperationException;
+import md.webservicecounter.exception.RegistrationException;
+import md.webservicecounter.exception.ResourceAlreadyExistsException;
+import md.webservicecounter.exception.ResourceNotFoundException;
 import md.webservicecounter.model.type.OperationType;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class CustomExceptionHandler {
+public class WebServiceExceptionHandler {
     
     @ExceptionHandler(ResourceNotFoundException.class)
     public void handleNotFound(HttpServletResponse response) throws IOException {
