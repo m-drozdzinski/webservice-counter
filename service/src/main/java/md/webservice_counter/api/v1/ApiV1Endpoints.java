@@ -21,12 +21,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.demo.controller.exception;
+package md.webservice_counter.api.v1;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-@ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class CounterNotFoundException  extends RuntimeException {
+public final class ApiV1Endpoints {
+    
+    private static final String PREFIX = "/v1";
+    public static final String COUNTERS = PREFIX + "/counters";
     
 }

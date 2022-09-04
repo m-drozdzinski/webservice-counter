@@ -21,12 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.demo.controller;
+package md.webservice_counter.exception;
 
-public class Endpoints {
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ResponseStatus(value = HttpStatus.NOT_FOUND)
+public class ResourceNotFoundException  extends RuntimeException {
     
-    public static final String NAME_PATH_VARIABLE = "name";
-    
-    public static final String V1_COUNTERS = "/v1/counters";
-    public static final String V1_COUNTER = "v1/counters/{name}";
 }

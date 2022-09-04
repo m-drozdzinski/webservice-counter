@@ -21,18 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.demo.controller.dto;
+package md.webservice_counter.model.db;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
-import lombok.Getter;
+import java.util.Optional;
+import org.springframework.data.repository.CrudRepository;
 
-@Getter
-public class GetCountersResponseDto {
-    @JsonProperty("counters")
-    List<CounterDto> counters;
+public interface CountersRepository extends CrudRepository<CounterEntity, Long> {
 
-    public GetCountersResponseDto(List<CounterDto> counters) {
-        this.counters = counters;
-    }
+    CounterEntity save(CounterEntity entity);
+    
+    Optional<CounterEntity> findByName(String name);
+    
+    List<CounterEntity> findAll();
+    
 }

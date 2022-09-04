@@ -21,12 +21,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.demo.controller.exception;
+package md.webservice_counter;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@ResponseStatus(value = HttpStatus.BAD_REQUEST)
-public class CounterAlreadyExistsException extends RuntimeException {
-    
+@SpringBootApplication
+public class CounterApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(CounterApplication.class, args);
+	}
+
 }

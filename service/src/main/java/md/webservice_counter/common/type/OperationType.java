@@ -21,23 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.demo.controller.dto;
+package md.webservice_counter.common.type;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
-
-@Getter
-public class CounterDto {
-
-    @JsonProperty("name")
-    String name;
-
-    @JsonProperty("value")
-    Long value;
-
-    public CounterDto(String name, Long value) {
-        this.name = name;
-        this.value = value;
-    }
-
+public enum OperationType {
+    INCREMENT
 }

@@ -21,16 +21,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.demo;
+package md.webservice_counter.model.dto;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
 
-@SpringBootApplication
-public class CounterApplication {
+@Getter
+public class CounterDto {
 
-	public static void main(String[] args) {
-		SpringApplication.run(CounterApplication.class, args);
-	}
+    @JsonProperty("name")
+    String name;
+
+    @JsonProperty("value")
+    Long value;
+
+    public CounterDto(String name, Long value) {
+        this.name = name;
+        this.value = value;
+    }
 
 }

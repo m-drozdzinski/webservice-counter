@@ -21,20 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.demo.model;
+package md.webservice_counter.model;
 
-import md.demo.model.db.CounterEntity;
+import md.webservice_counter.model.db.CounterEntity;
 import java.util.List;
-import md.demo.controller.dto.CounterDto;
-import md.demo.controller.dto.GetCountersResponseDto;
+import md.webservice_counter.model.dto.CounterDto;
 
 public class CounterMapper {
 
-    public static GetCountersResponseDto map(List<CounterEntity> counters) {
-        return new GetCountersResponseDto(
-                counters.stream()
+    public static List<CounterDto> map(List<CounterEntity> counters) {
+        return counters.stream()
                         .map(it -> new CounterDto(it.getName(), it.getCurrentValue()))
-                        .toList());
+                        .toList();
     }
 
     public static CounterDto map(CounterEntity counter) {

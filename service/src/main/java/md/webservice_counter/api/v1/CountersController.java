@@ -21,79 +21,63 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.demo.controller;
+package md.webservice_counter.api.v1;
 
-import md.demo.controller.type.OperationType;
+import java.util.List;
+import md.webservice_counter.common.type.OperationType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import static md.demo.controller.Endpoints.NAME_PATH_VARIABLE;
-import static md.demo.controller.Endpoints.V1_COUNTER;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import md.demo.controller.dto.PostCountersRequestDto;
-import md.demo.model.CounterService;
+import md.webservice_counter.service.CounterService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
-import static md.demo.controller.Endpoints.V1_COUNTERS;
-import md.demo.controller.dto.CounterDto;
-import md.demo.controller.dto.GetCountersResponseDto;
-import md.demo.controller.exception.CounterAlreadyExistsException;
-import md.demo.controller.exception.CounterNotFoundException;
-import md.demo.model.db.CounterEntity;
-import md.demo.model.CounterMapper;
+import md.webservice_counter.model.dto.CounterDto;
+import md.webservice_counter.model.CounterMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Slf4j
 @RestController
+@RequestMapping(ApiV1Endpoints.COUNTERS)
 @RequiredArgsConstructor
 public class CountersController {
 
     private final CounterService counterService;
     
     
-    @GetMapping(value = V1_COUNTERS)
-    public @ResponseBody GetCountersResponseDto getCounters() {
+    @GetMapping
+    public @ResponseBody List<CounterDto> getCounters() {
         return CounterMapper.map(counterService.getAllCounters());
     }
     
     
-    @GetMapping(value = V1_COUNTER)
+    @GetMapping("/{name}")
     public @ResponseBody CounterDto getCounter(
-            @PathVariable(NAME_PATH_VARIABLE) String name
+            @PathVariable("name") String name
     ) {
-        CounterEntity counter = counterService.getSingleCounter(name)
-                .orElseThrow(() -> new CounterNotFoundException());
-        return CounterMapper.map(counter);
+        return CounterMapper.map(counterService.getSingleCounter(name));
     }
     
     
-    @PostMapping(value = V1_COUNTERS)
+    @PostMapping
     public void postCounters(
-            @RequestBody @Validated PostCountersRequestDto request
-    ) {
-        if(!counterService.getSingleCounter(request.getName()).isEmpty()) {
-            throw new CounterAlreadyExistsException();
-        }
-                
-        counterService.createNewCounter(request.getName());
+            @RequestBody @Validated CounterDto request
+    ) {                
+        counterService.createCounter(request.getName(), request.getValue());
     }
     
     
-    @PostMapping(value = V1_COUNTER)
+    @PostMapping("/{name}")
     public void postCounters(
-            @PathVariable(NAME_PATH_VARIABLE) String name,
+            @PathVariable("name") String name,
             @RequestParam("operation") OperationType operation
     ) {
-        CounterEntity counter = counterService.getSingleCounter(name)
-                .orElseThrow(() -> new CounterNotFoundException());
         
-        switch(operation){
-            case INCREMENT -> counterService.increaseCounterValue(counter);
-            default -> throw new RuntimeException();
-        }
+        counterService.operate(name, operation);
     }
 
 }

@@ -21,13 +21,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.demo.model;
+package md.webservice_counter.service;
 
-import md.demo.model.db.CounterEntity;
-import md.demo.model.db.CountersRepository;
+import md.webservice_counter.model.db.CounterEntity;
+import md.webservice_counter.model.db.CountersRepository;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import md.webservice_counter.common.type.OperationType;
+import md.webservice_counter.exception.NotImplementedException;
+import md.webservice_counter.exception.ResourceAlreadyExistsException;
+import md.webservice_counter.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Component;
 
 
@@ -36,15 +40,22 @@ import org.springframework.stereotype.Component;
 public class CounterService {
     
     private static final Long DEFAULT_COUNTER_VALUE = 0L;
+    private static final Long DEFAULT_INCREASE_STEP = 1L;
     
     private final CountersRepository countersRepository;
+   
     
-    public void createNewCounter(String name) {
-        createNewCounter(name, DEFAULT_COUNTER_VALUE);
-    }
-    
-    public void createNewCounter(String name, Long value) {
-        CounterEntity counterEntity = new CounterEntity(name, value);
+    public void createCounter(String name, Long value) {
+        if(!countersRepository.findByName(name).isEmpty()) {
+            throw new ResourceAlreadyExistsException();
+        }
+        
+        CounterEntity counterEntity = 
+                new CounterEntity(
+                        name, 
+                        Optional.ofNullable(value)
+                                .orElse(DEFAULT_COUNTER_VALUE)
+                );
         countersRepository.save(counterEntity);
     }
     
@@ -52,12 +63,25 @@ public class CounterService {
         return countersRepository.findAll();
     }
     
-    public Optional<CounterEntity> getSingleCounter(String name) {
-        return countersRepository.findByName(name);
+    public CounterEntity getSingleCounter(String name) {
+        return countersRepository.findByName(name)
+                .orElseThrow(() -> new ResourceNotFoundException());
     }
 
-    public void increaseCounterValue(CounterEntity counter) {
-        counter.setCurrentValue(counter.getCurrentValue() + 1);
+
+    public void operate(String name, OperationType operation) {
+                
+        CounterEntity counter = countersRepository.findByName(name)
+                .orElseThrow(() -> new ResourceNotFoundException());
+                
+        switch(operation){
+            case INCREMENT -> increaseCounterValue(counter);
+            default -> throw new NotImplementedException();
+        }
+    }
+    
+    private void increaseCounterValue(CounterEntity counter) {
+        counter.setCurrentValue(counter.getCurrentValue() + DEFAULT_INCREASE_STEP);
         countersRepository.save(counter);
     }
 }
