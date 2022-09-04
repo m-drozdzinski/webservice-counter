@@ -64,7 +64,7 @@ public class CountersService {
     }
     
     public List<CounterEntity> getAllCounters() {
-        log.info("Collecting all counter...");
+        log.info("Collecting all counters...");
         return countersRepository.findAll();
     }
     
