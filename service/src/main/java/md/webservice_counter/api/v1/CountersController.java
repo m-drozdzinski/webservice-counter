@@ -26,7 +26,6 @@ package md.webservice_counter.api.v1;
 import java.util.List;
 import md.webservice_counter.common.type.OperationType;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import md.webservice_counter.service.CounterService;
@@ -40,7 +39,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@Slf4j
 @RestController
 @RequestMapping(ApiV1Endpoints.COUNTERS)
 @RequiredArgsConstructor

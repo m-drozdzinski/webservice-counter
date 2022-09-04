@@ -28,13 +28,14 @@ import md.webservice_counter.model.db.CountersRepository;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import md.webservice_counter.common.type.OperationType;
 import md.webservice_counter.exception.NotImplementedException;
 import md.webservice_counter.exception.ResourceAlreadyExistsException;
 import md.webservice_counter.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Component;
 
-
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class CounterService {
@@ -46,7 +47,9 @@ public class CounterService {
    
     
     public void createCounter(String name, Long value) {
+        log.info("Creating new counter...");
         if(!countersRepository.findByName(name).isEmpty()) {
+            log.info("Counter cannot be created, because it already exists");
             throw new ResourceAlreadyExistsException();
         }
         
@@ -57,22 +60,31 @@ public class CounterService {
                                 .orElse(DEFAULT_COUNTER_VALUE)
                 );
         countersRepository.save(counterEntity);
+        log.info("New counter created");
     }
     
     public List<CounterEntity> getAllCounters() {
+        log.info("Collecting all counter...");
         return countersRepository.findAll();
     }
     
     public CounterEntity getSingleCounter(String name) {
+        log.info("Collecting single counter...");
         return countersRepository.findByName(name)
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(() -> {
+                    log.info("Counter does not exists");
+                    return new ResourceNotFoundException();
+                        });
     }
 
 
     public void operate(String name, OperationType operation) {
-                
+        log.info("Increasing counter's value...");
         CounterEntity counter = countersRepository.findByName(name)
-                .orElseThrow(() -> new ResourceNotFoundException());
+                .orElseThrow(() -> {
+                    log.info("Counter does not exists");
+                    return new ResourceNotFoundException();
+                        });
                 
         switch(operation){
             case INCREMENT -> increaseCounterValue(counter);
@@ -83,5 +95,6 @@ public class CounterService {
     private void increaseCounterValue(CounterEntity counter) {
         counter.setCurrentValue(counter.getCurrentValue() + DEFAULT_INCREASE_STEP);
         countersRepository.save(counter);
+        log.info("Counter's value has been increased");
     }
 }
