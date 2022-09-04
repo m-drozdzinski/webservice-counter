@@ -21,12 +21,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.webservice_counter.exception;
+package md.webservicecounter.config;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import md.webservicecounter.api.v1.ApiV1Endpoints;
+import md.webservicecounter.model.type.UserRole;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
 
-@ResponseStatus(value = HttpStatus.NOT_FOUND)
-public class ResourceNotFoundException  extends RuntimeException {
+@Configuration
+@EnableWebSecurity
+public class BasicAuthWebSecurityConfiguration
+{
     
+  @Bean
+  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http
+         .csrf().disable()
+         .authorizeRequests()
+            .antMatchers(ApiV1Endpoints.COUNTERS).hasRole(UserRole.USER.name())
+            .antMatchers(ApiV1Endpoints.USERS).permitAll()
+         .and()
+         .httpBasic();
+
+    return http.build();
+  }
+
+  @Bean
+  public InMemoryUserDetailsManager inMemoryUserDetailsManager() {
+    return new InMemoryUserDetailsManager();
+  }
+  
 }

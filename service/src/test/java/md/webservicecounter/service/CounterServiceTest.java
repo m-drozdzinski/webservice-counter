@@ -21,14 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.webservice_counter.service;
+package md.webservicecounter.service;
 
 import java.util.Optional;
-import md.webservice_counter.model.type.OperationType;
-import md.webservice_counter.exception.ResourceAlreadyExistsException;
-import md.webservice_counter.exception.ResourceNotFoundException;
-import md.webservice_counter.model.db.CounterEntity;
-import md.webservice_counter.model.db.CountersRepository;
+import md.webservicecounter.model.type.OperationType;
+import md.webservicecounter.exception.ResourceAlreadyExistsException;
+import md.webservicecounter.exception.ResourceNotFoundException;
+import md.webservicecounter.model.db.CounterEntity;
+import md.webservicecounter.model.db.CountersRepository;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.BeforeEach;

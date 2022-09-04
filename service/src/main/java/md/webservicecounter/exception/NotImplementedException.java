@@ -21,22 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.webservice_counter.model.dto;
+package md.webservicecounter.exception;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.Getter;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-@Getter
-public class UserDto {
-    
-    @JsonProperty(value = "username")
-    String username;
-    @JsonProperty(value = "password")
-    String password;
-
-    public UserDto(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
+@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
+public class NotImplementedException extends RuntimeException {
     
 }

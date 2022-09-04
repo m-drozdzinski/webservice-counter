@@ -21,9 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.webservice_counter.model.type;
+package md.webservicecounter.model.db;
 
+import java.util.List;
+import java.util.Optional;
+import org.springframework.data.repository.CrudRepository;
 
-public enum UserRole {
-   USER 
+public interface CountersRepository extends CrudRepository<CounterEntity, Long> {
+
+    CounterEntity save(CounterEntity entity);
+    
+    Optional<CounterEntity> findByName(String name);
+    
+    List<CounterEntity> findAll();
+    
 }

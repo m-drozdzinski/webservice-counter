@@ -21,18 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.webservice_counter.service;
+package md.webservicecounter.service;
 
-import md.webservice_counter.model.db.CounterEntity;
-import md.webservice_counter.model.db.CountersRepository;
+import md.webservicecounter.model.db.CounterEntity;
+import md.webservicecounter.model.db.CountersRepository;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import md.webservice_counter.model.type.OperationType;
-import md.webservice_counter.exception.NotImplementedException;
-import md.webservice_counter.exception.ResourceAlreadyExistsException;
-import md.webservice_counter.exception.ResourceNotFoundException;
+import md.webservicecounter.model.type.OperationType;
+import md.webservicecounter.exception.NotImplementedException;
+import md.webservicecounter.exception.ResourceAlreadyExistsException;
+import md.webservicecounter.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Component;
 
 @Slf4j

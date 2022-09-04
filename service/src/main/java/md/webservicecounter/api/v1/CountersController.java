@@ -21,18 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.webservice_counter.api.v1;
+package md.webservicecounter.api.v1;
 
 import java.util.List;
-import md.webservice_counter.model.type.OperationType;
+import md.webservicecounter.model.type.OperationType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import md.webservice_counter.service.CounterService;
+import md.webservicecounter.service.CounterService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
-import md.webservice_counter.model.dto.CounterDto;
-import md.webservice_counter.model.CounterMapper;
+import md.webservicecounter.model.dto.CounterDto;
+import md.webservicecounter.model.CounterMapper;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;

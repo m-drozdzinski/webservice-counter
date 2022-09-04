@@ -21,13 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.webservice_counter.api.v1;
+package md.webservicecounter.model;
 
-public final class ApiV1Endpoints {
-    
-    private static final String PREFIX = "/v1";
-    
-    public static final String COUNTERS = PREFIX + "/counters";
-    public static final String USERS = PREFIX + "/users";
-    
+import md.webservicecounter.model.db.CounterEntity;
+import java.util.List;
+import md.webservicecounter.model.dto.CounterDto;
+
+public class CounterMapper {
+
+    public static List<CounterDto> map(List<CounterEntity> counters) {
+        return counters.stream()
+                        .map(it -> new CounterDto(it.getName(), it.getCurrentValue()))
+                        .toList();
+    }
+
+    public static CounterDto map(CounterEntity counter) {
+        return new CounterDto(counter.getName(), counter.getCurrentValue());
+    }
+
 }

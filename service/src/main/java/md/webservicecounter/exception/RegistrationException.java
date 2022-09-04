@@ -21,16 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.webservice_counter;
+package md.webservicecounter.exception;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-@SpringBootApplication
-public class CounterApplication {
-
-	public static void main(String[] args) {
-		SpringApplication.run(CounterApplication.class, args);
-	}
-
+@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+public class RegistrationException  extends RuntimeException {
+    
 }

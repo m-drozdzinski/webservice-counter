@@ -21,18 +21,12 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.webservice_counter.model.db;
+package md.webservicecounter.exception;
 
-import java.util.List;
-import java.util.Optional;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
 
-public interface CountersRepository extends CrudRepository<CounterEntity, Long> {
-
-    CounterEntity save(CounterEntity entity);
-    
-    Optional<CounterEntity> findByName(String name);
-    
-    List<CounterEntity> findAll();
+@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+public class ResourceAlreadyExistsException extends RuntimeException {
     
 }

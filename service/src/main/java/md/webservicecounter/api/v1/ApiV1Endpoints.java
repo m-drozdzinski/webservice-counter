@@ -21,12 +21,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.webservice_counter.exception;
+package md.webservicecounter.api.v1;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-@ResponseStatus(value = HttpStatus.BAD_REQUEST)
-public class RegistrationException  extends RuntimeException {
+public final class ApiV1Endpoints {
+    
+    private static final String PREFIX = "/v1";
+    
+    public static final String COUNTERS = PREFIX + "/counters";
+    public static final String USERS = PREFIX + "/users";
     
 }

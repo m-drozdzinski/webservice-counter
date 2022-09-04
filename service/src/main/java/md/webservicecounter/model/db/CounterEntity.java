@@ -21,22 +21,36 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.webservice_counter.model;
+package md.webservicecounter.model.db;
 
-import md.webservice_counter.model.db.CounterEntity;
-import java.util.List;
-import md.webservice_counter.model.dto.CounterDto;
+import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-public class CounterMapper {
+@Entity
+@Getter
+@Setter
+@NoArgsConstructor
+public class CounterEntity implements Serializable {
 
-    public static List<CounterDto> map(List<CounterEntity> counters) {
-        return counters.stream()
-                        .map(it -> new CounterDto(it.getName(), it.getCurrentValue()))
-                        .toList();
-    }
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
-    public static CounterDto map(CounterEntity counter) {
-        return new CounterDto(counter.getName(), counter.getCurrentValue());
-    }
+    @Column(unique=true)
+    private String name;
+
+    private Long currentValue;
+
+    public CounterEntity(String name, Long currentValue) {
+        this.name = name;
+        this.currentValue = currentValue;
+    }    
 
 }

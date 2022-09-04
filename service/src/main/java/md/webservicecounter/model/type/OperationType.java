@@ -21,12 +21,8 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.webservice_counter.exception;
+package md.webservicecounter.model.type;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.ResponseStatus;
-
-@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-public class NotImplementedException extends RuntimeException {
-    
+public enum OperationType {
+    INCREMENT
 }

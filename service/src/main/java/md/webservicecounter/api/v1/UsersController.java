@@ -21,18 +21,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.webservice_counter.api.v1;
+package md.webservicecounter.api.v1;
 
-import md.webservice_counter.model.dto.UserDto;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.NoArgsConstructor;
+import md.webservicecounter.model.dto.UserDto;
 import lombok.RequiredArgsConstructor;
-import md.webservice_counter.exception.RegistrationException;
-import md.webservice_counter.model.type.UserRole;
+import md.webservicecounter.exception.RegistrationException;
+import md.webservicecounter.model.type.UserRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
