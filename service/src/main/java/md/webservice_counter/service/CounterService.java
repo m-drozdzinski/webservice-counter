@@ -29,7 +29,7 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import md.webservice_counter.common.type.OperationType;
+import md.webservice_counter.model.type.OperationType;
 import md.webservice_counter.exception.NotImplementedException;
 import md.webservice_counter.exception.ResourceAlreadyExistsException;
 import md.webservice_counter.exception.ResourceNotFoundException;

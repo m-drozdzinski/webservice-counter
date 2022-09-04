@@ -24,7 +24,7 @@
 package md.webservice_counter.api.v1;
 
 import java.util.List;
-import md.webservice_counter.common.type.OperationType;
+import md.webservice_counter.model.type.OperationType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;

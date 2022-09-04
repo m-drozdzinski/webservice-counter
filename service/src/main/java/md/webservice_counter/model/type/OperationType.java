@@ -21,7 +21,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.webservice_counter.common.type;
+package md.webservice_counter.model.type;
 
 public enum OperationType {
     INCREMENT

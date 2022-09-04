@@ -21,13 +21,22 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.webservice_counter.api.v1;
+package md.webservice_counter.model.dto;
 
-public final class ApiV1Endpoints {
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.Getter;
+
+@Getter
+public class UserDto {
     
-    private static final String PREFIX = "/v1";
-    
-    public static final String COUNTERS = PREFIX + "/counters";
-    public static final String USERS = PREFIX + "/users";
+    @JsonProperty(value = "username")
+    String username;
+    @JsonProperty(value = "password")
+    String password;
+
+    public UserDto(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
     
 }

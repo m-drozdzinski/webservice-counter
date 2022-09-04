@@ -6,6 +6,20 @@ servers:
 - url: http://localhost:8080
   description: Generated server url
 paths:
+  /v1/users:
+    post:
+      tags:
+      - users-controller
+      operationId: postUsers
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserDto'
+        required: true
+      responses:
+        "200":
+          description: OK
   /v1/counters:
     get:
       tags:
@@ -17,7 +31,9 @@ paths:
           content:
             '*/*':
               schema:
-                $ref: '#/components/schemas/GetCountersResponseDto'
+                type: array
+                items:
+                  $ref: '#/components/schemas/CounterDto'
     post:
       tags:
       - counters-controller
@@ -26,7 +42,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PostCountersRequestDto'
+              $ref: '#/components/schemas/CounterDto'
         required: true
       responses:
         "200":
@@ -71,14 +87,13 @@ paths:
           description: OK
 components:
   schemas:
-    PostCountersRequestDto:
+    UserDto:
       type: object
       properties:
-        name:
+        username:
           type: string
-        value:
-          type: integer
-          format: int64
+        password:
+          type: string
     CounterDto:
       type: object
       properties:
@@ -87,10 +102,3 @@ components:
         value:
           type: integer
           format: int64
-    GetCountersResponseDto:
-      type: object
-      properties:
-        counters:
-          type: array
-          items:
-            $ref: '#/components/schemas/CounterDto'

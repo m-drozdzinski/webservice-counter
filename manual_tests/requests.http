@@ -1,6 +1,16 @@
+### USER REGISTRATION
+POST http://localhost:8080/v1/users
+Content-Type: application/json
+
+{
+    "username":"user",
+    "password":"secret@123"
+}
+
 ### CREATE NEW COUNTER
 POST http://localhost:8080/v1/counters
 Content-Type: application/json
+Authorization: Basic dXNlcjpzZWNyZXRAMTIz
 
 {
     "name":"my_counter_1",
@@ -10,15 +20,23 @@ Content-Type: application/json
 
 ### GET LIST OF ALL COUNTERS
 GET http://localhost:8080/v1/counters
+Authorization: Basic dXNlcjpzZWNyZXRAMTIz
 
 
 ### GET SINGLE COUNTER
 GET http://localhost:8080/v1/counters/my_counter_1
+Authorization: Basic dXNlcjpzZWNyZXRAMTIz
 
 
 ### INCREASE VALUE OF SINGLE COUNTER
 POST http://localhost:8080/v1/counters/my_counter_1?operation=INCREMENT
+Authorization: Basic dXNlcjpzZWNyZXRAMTIz
 
 
 ### GET SINGLE COUNTER WHICH DO NOT EXISTS
 GET http://localhost:8080/v1/counters/not_existing_counter
+Authorization: Basic dXNlcjpzZWNyZXRAMTIz
+
+
+### GET LIST OF ALL COUNTERS - NO AUTHORIZATION
+GET http://localhost:8080/v1/counters

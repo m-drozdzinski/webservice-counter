@@ -24,15 +24,13 @@
 package md.webservice_counter.service;
 
 import java.util.Optional;
-import md.webservice_counter.common.type.OperationType;
+import md.webservice_counter.model.type.OperationType;
 import md.webservice_counter.exception.ResourceAlreadyExistsException;
 import md.webservice_counter.exception.ResourceNotFoundException;
 import md.webservice_counter.model.db.CounterEntity;
 import md.webservice_counter.model.db.CountersRepository;
 import static org.assertj.core.api.Assertions.assertThat;
-import org.junit.jupiter.api.Assertions;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;

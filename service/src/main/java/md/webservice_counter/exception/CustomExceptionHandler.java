@@ -49,6 +49,11 @@ public class CustomExceptionHandler {
         createJSONErrorResponse(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Service not implemented", response);
     }
     
+        @ExceptionHandler(RegistrationException.class)
+    public void handleRegistrationException(HttpServletResponse response) throws IOException {
+        createJSONErrorResponse(HttpServletResponse.SC_BAD_REQUEST, "User already exists", response);
+    }
+    
     public static String createErrorJSON(int errorCode, String errorMessage) {
         ObjectNode errorNode = JsonNodeFactory.instance.objectNode();
         errorNode.put("code", errorCode);
