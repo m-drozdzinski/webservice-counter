@@ -21,28 +21,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  * THE SOFTWARE.
  */
-package md.webservicecounter.api.v1;
+package md.webservicecounter.service;
 
-import md.webservicecounter.model.dto.UserDto;
 import lombok.RequiredArgsConstructor;
-import md.webservicecounter.service.UsersService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import md.webservicecounter.exception.RegistrationException;
+import md.webservicecounter.model.type.UserRole;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.stereotype.Component;
 
-@RestController
-@RequestMapping(ApiV1Endpoints.USERS)
+@Slf4j
+@Component
 @RequiredArgsConstructor
-public class UsersController {
+public class UsersService {
 
-    private final UsersService usersService;
+    @Autowired
+    public InMemoryUserDetailsManager inMemoryUserDetailsManager;
 
-    @PostMapping
-    public void postUsers(
-            @RequestBody UserDto request
+    public void register(
+            String username,
+            String password
     ) {
-        usersService.register(request.getUsername(), request.getPassword());
+        log.info("Registering new user...");
+        if (!inMemoryUserDetailsManager.userExists(username)) {
+            inMemoryUserDetailsManager.createUser(
+                    User
+                            .withUsername(username)
+                            .password("{noop}" + password)
+                            .roles(UserRole.USER.name())
+                            .build());
+            log.info("New user registered");
+        } else {
+            log.warn("Cannot create user, because it already exists");
+            throw new RegistrationException();
+        }
     }
-
 }

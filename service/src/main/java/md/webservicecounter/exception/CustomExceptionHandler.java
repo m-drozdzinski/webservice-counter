@@ -27,6 +27,7 @@ import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
+import md.webservicecounter.model.type.OperationType;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -44,9 +45,9 @@ public class CustomExceptionHandler {
         createJSONErrorResponse(HttpServletResponse.SC_BAD_REQUEST, "Resource already exists", response);
     }
     
-    @ExceptionHandler(NotImplementedException.class)
-    public void handleNotImplemented(HttpServletResponse response) throws IOException {
-        createJSONErrorResponse(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Service not implemented", response);
+    @ExceptionHandler(ForbiddenOperationException.class)
+    public void handleForbiddenOperation(HttpServletResponse response) throws IOException {
+        createJSONErrorResponse(HttpServletResponse.SC_BAD_REQUEST, "Operation is forbidden. Allowed operation: %s".formatted(OperationType.INCREMENT), response);
     }
     
         @ExceptionHandler(RegistrationException.class)

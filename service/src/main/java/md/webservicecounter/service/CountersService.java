@@ -30,7 +30,7 @@ import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import md.webservicecounter.model.type.OperationType;
-import md.webservicecounter.exception.NotImplementedException;
+import md.webservicecounter.exception.ForbiddenOperationException;
 import md.webservicecounter.exception.ResourceAlreadyExistsException;
 import md.webservicecounter.exception.ResourceNotFoundException;
 import org.springframework.stereotype.Component;
@@ -38,7 +38,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class CounterService {
+public class CountersService {
     
     private static final Long DEFAULT_COUNTER_VALUE = 0L;
     private static final Long DEFAULT_INCREASE_STEP = 1L;
@@ -88,7 +88,7 @@ public class CounterService {
                 
         switch(operation){
             case INCREMENT -> increaseCounterValue(counter);
-            default -> throw new NotImplementedException();
+            default -> throw new ForbiddenOperationException();
         }
     }
     

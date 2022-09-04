@@ -28,7 +28,7 @@ import md.webservicecounter.model.type.OperationType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import md.webservicecounter.service.CounterService;
+import md.webservicecounter.service.CountersService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestBody;
 import md.webservicecounter.model.dto.CounterDto;
@@ -44,12 +44,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequiredArgsConstructor
 public class CountersController {
 
-    private final CounterService counterService;
+    private final CountersService countersService;
     
     
     @GetMapping
     public @ResponseBody List<CounterDto> getCounters() {
-        return CounterMapper.map(counterService.getAllCounters());
+        return CounterMapper.map(countersService.getAllCounters());
     }
     
     
@@ -57,7 +57,7 @@ public class CountersController {
     public @ResponseBody CounterDto getCounter(
             @PathVariable("name") String name
     ) {
-        return CounterMapper.map(counterService.getSingleCounter(name));
+        return CounterMapper.map(countersService.getSingleCounter(name));
     }
     
     
@@ -65,7 +65,7 @@ public class CountersController {
     public void postCounters(
             @RequestBody @Validated CounterDto request
     ) {                
-        counterService.createCounter(request.getName(), request.getValue());
+        countersService.createCounter(request.getName(), request.getValue());
     }
     
     
@@ -75,7 +75,7 @@ public class CountersController {
             @RequestParam("operation") OperationType operation
     ) {
         
-        counterService.operate(name, operation);
+        countersService.operate(name, operation);
     }
 
 }

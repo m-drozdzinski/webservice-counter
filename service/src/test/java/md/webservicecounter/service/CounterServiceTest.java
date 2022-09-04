@@ -42,11 +42,11 @@ public class CounterServiceTest {
 
     private final CountersRepository countersRepository = mock(CountersRepository.class);
 
-    private CounterService sut;
+    private CountersService sut;
 
     @BeforeEach
     void setup() {
-        sut = new CounterService(countersRepository);
+        sut = new CountersService(countersRepository);
     }
 
     @Test
