@@ -20,4 +20,4 @@ There are some examples how to interact with service in directory:  `/manual_tes
 Api can be found in `documentation` directory. If you followed [starting instruction](#starting-instruction) you should be able to open swagger ui with `http://localhost:8080/swagger-ui.html`
 
 ## Troubleshooting
-You may need to install doker for this project. Please follow installation instructions [link](https://docs.docker.com/engine/install/)
+You may need to install docker for this project. Please follow installation instructions [link](https://docs.docker.com/engine/install/)
